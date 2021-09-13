@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+
+// import HomePage from "./pages/homepage/homepage.component";
+// import ShopPage from "./pages/shop/shop.component";
+// import SignInAndSignUpPage from "./components/sign-in-and-signup/sign-in-and-sign-up.component";
+// import CheckOutPage from "./pages/checkout/checkout.component";
+
+// import Header from "./components/header/header.component";
+
+// import { selectCurrentUser } from "./redux/user/user.selectors";
+// import { checkUserSession } from "./redux/user/user.action";
+
+class App extends React.Component {
+  // unsubscribeFromAuth = null;
+
+  // componentDidMount() {
+  //   const { checkUserSession } = this.props;
+
+  //   checkUserSession();
+  // }
+
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // }
+
+  render() {
+    return (
+      <div>
+        <p>Hello there!</p>
+      </div>
+    );
+  }
 }
+
+// const mapStateToProps = createStructuredSelector({
+//   currentUser: selectCurrentUser,
+// });
+
+// const mapDispatchToProps = (dispatch) => ({
+//   checkUserSession: () => dispatch(checkUserSession()),
+// });
+
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default App;
