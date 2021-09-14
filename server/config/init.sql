@@ -40,6 +40,7 @@ CREATE TABLE public.products
     product_id SERIAL NOT NULL,
     name character varying(50) NOT NULL,
     price real NOT NULL,
+    category character varying(20) NOT NULL,
     description text NOT NULL,
     stock_quantity integer NOT NULL,
     image_url character varying,

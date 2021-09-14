@@ -17,11 +17,12 @@ const createProductDb = async ({
   price,
   description,
   stock_quantity,
+  category,
   image_url,
 }) => {
   const { rows: product } = await pool.query(
-    "INSERT INTO products(name, price, description, stock_quantity, image_url) VALUES($1, $2, $3, $4, $5) returning *",
-    [name, price, description, stock_quantity, image_url]
+    "INSERT INTO products(name, price, description, stock_quantity, category, image_url) VALUES($1, $2, $3, $4, $5, $6) returning *",
+    [name, price, description, stock_quantity, category, image_url]
   );
   return product[0];
 };

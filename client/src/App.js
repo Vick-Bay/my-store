@@ -1,50 +1,61 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import "./App.css";
 
-// import HomePage from "./pages/homepage/homepage.component";
-// import ShopPage from "./pages/shop/shop.component";
-// import SignInAndSignUpPage from "./components/sign-in-and-signup/sign-in-and-sign-up.component";
-// import CheckOutPage from "./pages/checkout/checkout.component";
+import HomePage from "./pages/homepage/homepage.component";
+import ShopPage from "./pages/shop/shop.component";
+import SignInAndSignUpPage from "./components/sign-in-and-signup/sign-in-and-sign-up.component";
+import CheckOutPage from "./pages/checkout/checkout.component";
 
-// import Header from "./components/header/header.component";
+import Header from "./components/header/header.component";
 
-// import { selectCurrentUser } from "./redux/user/user.selectors";
-// import { checkUserSession } from "./redux/user/user.action";
+import { selectCurrentUser } from "./redux/user/user.selectors";
+import { checkUserSession } from "./redux/user/user.action";
 
 class App extends React.Component {
-  // unsubscribeFromAuth = null;
-
-  // componentDidMount() {
-  //   const { checkUserSession } = this.props;
-
-  //   checkUserSession();
-  // }
-
-  // componentWillUnmount() {
-  //   this.unsubscribeFromAuth();
-  // }
+  componentDidMount() {
+    const { checkUserSession } = this.props;
+    if (this.props.currentUser) {
+      checkUserSession();
+    }
+  }
 
   render() {
     return (
       <div>
-        <p>Hello there!</p>
+        <Toaster position="top-right" />
+        <Header />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckOutPage} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              this.props.currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <SignInAndSignUpPage />
+              )
+            }
+          />
+        </Switch>
       </div>
     );
   }
 }
 
-// const mapStateToProps = createStructuredSelector({
-//   currentUser: selectCurrentUser,
-// });
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
 
-// const mapDispatchToProps = (dispatch) => ({
-//   checkUserSession: () => dispatch(checkUserSession()),
-// });
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession()),
+});
 
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

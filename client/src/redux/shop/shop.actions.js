@@ -1,24 +1,25 @@
+import productService from "../../services/product.service";
 import ShopActionTypes from "./shop.types";
+import toast from "react-hot-toast";
 
-//redux thunk code
+export const fetchCollectionsStart = () => async (dispatch) => {
+  try {
+    dispatch({ type: ShopActionTypes.FETCH_COLLECTIONS_START });
+    const response = await productService.getProducts(1, 20);
+    dispatch(fetchCollectionsSuccess(response.data));
+  } catch (error) {
+    dispatch(fetchCollectionsFailure());
+    toast.error("Failed to get shop items ");
+  }
+};
 
-// import {
-//   firestore,
-//   convertCollectionsSnapshotToMap,
-// } from "../../firebase/firebase.utils";
-
-export const fetchCollectionsStart = () => ({
-  type: ShopActionTypes.FETCH_COLLECTIONS_START,
-});
-
-export const fetchCollectionsSuccess = (collectionsMap) => ({
+export const fetchCollectionsSuccess = (collections) => ({
   type: ShopActionTypes.FETCH_COLLECTIONS_SUCCESS,
-  payload: collectionsMap,
+  payload: collections,
 });
 
-export const fetchCollectionsFailure = (errorMessage) => ({
+export const fetchCollectionsFailure = () => ({
   type: ShopActionTypes.FETCH_COLLECTIONS_FAILURE,
-  payload: errorMessage,
 });
 
 //redux thunk code
