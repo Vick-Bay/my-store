@@ -1,11 +1,11 @@
 import styled from "styled-components/macro";
-import CustomButton from "../custom-button/custom-button.component";
+import CustomButton from "../../components/custom-button/custom-button.component";
 
-export const CollectionItemContainer = styled.div`
-  width: 22vw;
+export const ProductItemContainer = styled.div`
+  width: 50vw;
   display: flex;
   flex-direction: column;
-  height: 350px;
+  height: 50vh;
   align-items: center;
   position: relative;
   &:hover {
@@ -36,7 +36,7 @@ export const BackgroundImage = styled.div`
   background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 `;
 
-export const CollectionFooterContainer = styled.div`
+export const ProductFooterContainer = styled.div`
   width: 100%;
   height: 5%;
   display: flex;

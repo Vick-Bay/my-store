@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { addItem } from "../../redux/cart/cart.action";
 
@@ -16,13 +17,16 @@ import {
 const CollectionItem = ({
   name,
   price,
+  product_id,
   image_url,
   stock_quantity,
   addItem,
 }) => {
+  const history = useHistory();
+  const toProduct = (product_id) => history.push(`products/${product_id}`);
+
   return (
-    <CollectionItemContainer>
-      {console.log(image_url)}
+    <CollectionItemContainer onClick={() => toProduct(product_id)}>
       <BackgroundImage className="image" imageUrl={image_url} />
       <CollectionFooterContainer>
         <NameContainer>{name}</NameContainer>

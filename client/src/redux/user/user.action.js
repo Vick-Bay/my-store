@@ -32,10 +32,9 @@ export const signInFailure = (error) => ({
 export const checkUserSession = () => async (dispatch) => {
   try {
     const response = await authService.getCurrentUser();
-    console.log(response);
     dispatch({
       type: UserActionTypes.CHECK_USER_SESSION,
-      payload: response,
+      payload: response.data,
     });
   } catch (error) {
     console.log(error);

@@ -7,7 +7,10 @@ const database =
     ? process.env.PGDATABASE_TEST
     : process.env.PGDATABASE;
 
-const connectionString = `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${database}`;
+//const connectionString = `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${database}`;
+
+const connectionString =
+  "postgres://lyjgbjog:0gBE6yDBQ0UIkjp4YmBJmqBr2pntBH3e@john.db.elephantsql.com/lyjgbjog";
 
 const pool = new Pool({
   connectionString: isProduction

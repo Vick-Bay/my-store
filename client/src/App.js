@@ -8,6 +8,7 @@ import "./App.css";
 
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
+import ProductDetails from "./pages/product/product.component";
 import SignInAndSignUpPage from "./components/sign-in-and-signup/sign-in-and-sign-up.component";
 import CheckOutPage from "./pages/checkout/checkout.component";
 
@@ -19,7 +20,8 @@ import { checkUserSession } from "./redux/user/user.action";
 class App extends React.Component {
   componentDidMount() {
     const { checkUserSession } = this.props;
-    if (this.props.currentUser) {
+
+    if (localStorage.getItem("token")) {
       checkUserSession();
     }
   }
@@ -33,6 +35,7 @@ class App extends React.Component {
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={CheckOutPage} />
+          <Route exact path="/products/:id/" component={ProductDetails} />
           <Route
             exact
             path="/signin"
