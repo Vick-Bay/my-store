@@ -62,8 +62,8 @@ CREATE TABLE public.reviews
     user_id integer NOT NULL,
     content text NOT NULL,
     product_id integer NOT NULL,
-    date date NOT NULL,
-    id integer NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    id SERIAL NOT NULL,
     PRIMARY KEY (user_id, product_id)
 );
 

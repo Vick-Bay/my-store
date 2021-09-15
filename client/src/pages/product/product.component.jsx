@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import { addItem } from "../../redux/cart/cart.action";
 import productService from "../../services/product.service";
@@ -8,44 +8,65 @@ import ProductReview from "../../components/review/review.component";
 
 import {
   ProductItemContainer,
-  ProductFooterContainer,
   StockQuantityContainer,
   AddButton,
-  BackgroundImage,
+  Image,
   NameContainer,
   PriceContainer,
 } from "./product.styles";
 
-const ProductDetails = () => {
-  const { id } = useParams();
-  const [product, setProduct] = useState(null);
+class ProductDetails extends React.Component {
+  constructor(props) {
+    super(props);
 
-  useEffect(() => {
-    async function fetchData() {
-      const { data: product } = await productService.getProduct(id);
-      setProduct(product);
+    this.state = {
+      product: null,
+      isLoaded: false,
+    };
+  }
+
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    this.fetchData(id);
+  }
+
+  fetchData = async (id) => {
+    const { data: product } = await productService.getProduct(id);
+    this.setState({
+      isLoaded: true,
+      product: product,
+    });
+  };
+
+  handleAddToCart = async () => {
+    const { addItem } = this.props;
+    const { product } = this.state;
+    addItem(product);
+  };
+
+  render() {
+    const { product, isLoaded } = this.state;
+    if (!isLoaded) {
+      return <div>Loading... </div>;
+    } else {
+      return (
+        <ProductItemContainer>
+          <Image className="image" src={product.image_url} />
+          <NameContainer>{product.name}</NameContainer>
+          <PriceContainer>Rs {product.price}</PriceContainer>
+          <StockQuantityContainer>
+            In Stock: {product.stock_quantity}
+          </StockQuantityContainer>
+          <AddButton onClick={this.handleAddToCart}>Add to cart</AddButton>
+          <ProductReview productId={product.product_id} />
+        </ProductItemContainer>
+      );
     }
-    fetchData();
-  }, [id]);
-  console.log(product);
-  return (
-    <ProductItemContainer>
-      <BackgroundImage className="image" imageUrl={product.image_url} />
-      <ProductFooterContainer>
-        <NameContainer>{product.name}</NameContainer>
-        <PriceContainer>Rs {product.price}</PriceContainer>
-        <StockQuantityContainer>
-          In Stock: {product.stock_quantity}
-        </StockQuantityContainer>
-      </ProductFooterContainer>
-      <AddButton inverted>Add to cart</AddButton>
-      <ProductReview />
-    </ProductItemContainer>
-  );
-};
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   addItem: (item) => dispatch(addItem(item)),
 });
 
-export default connect(null, mapDispatchToProps)(ProductDetails);
+export default withRouter(connect(null, mapDispatchToProps)(ProductDetails));

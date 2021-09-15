@@ -21,18 +21,3 @@ export const fetchCollectionsSuccess = (collections) => ({
 export const fetchCollectionsFailure = () => ({
   type: ShopActionTypes.FETCH_COLLECTIONS_FAILURE,
 });
-
-//redux thunk code
-// export const fetchCollectionsStartAsync = () => {
-//   return (dispatch) => {
-//     const collectionRef = firestore.collection("collections");
-
-//     collectionRef
-//       .get()
-//       .then((snapshot) => {
-//         const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-//         dispatch(fetchCollectionsSuccess(collectionsMap));
-//       })
-//       .catch((error) => dispatch(fetchCollectionsFailure(error.message)));
-//   };
-// };

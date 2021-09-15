@@ -75,7 +75,7 @@ const createProductReview = async (req, res) => {
   try {
     const result = await pool.query(
       `INSERT INTO reviews(user_id, product_id, content)
-       VALUES($1, $2, $3, $4) returning *
+       VALUES($1, $2, $3) returning *
       `,
       [user_id, product_id, content]
     );

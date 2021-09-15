@@ -14,28 +14,28 @@ import {
   PriceContainer,
 } from "./collection-item.styles";
 
-const CollectionItem = ({
-  name,
-  price,
-  product_id,
-  image_url,
-  stock_quantity,
-  addItem,
-}) => {
+const CollectionItem = ({ item, addItem }) => {
   const history = useHistory();
   const toProduct = (product_id) => history.push(`products/${product_id}`);
 
+  const addToCart = async (e) => {
+    e.stopPropagation();
+    await addItem(item);
+  };
+
   return (
-    <CollectionItemContainer onClick={() => toProduct(product_id)}>
-      <BackgroundImage className="image" imageUrl={image_url} />
+    <CollectionItemContainer onClick={() => toProduct(item.product_id)}>
+      <BackgroundImage className="image" imageUrl={item.image_url} />
       <CollectionFooterContainer>
-        <NameContainer>{name}</NameContainer>
-        <PriceContainer>Rs {price}</PriceContainer>
+        <NameContainer>{item.name}</NameContainer>
+        <PriceContainer>Rs {item.price}</PriceContainer>
         <StockQuantityContainer>
-          In Stock: {stock_quantity}
+          In Stock: {item.stock_quantity}
         </StockQuantityContainer>
       </CollectionFooterContainer>
-      <AddButton inverted>Add to cart</AddButton>
+      <AddButton inverted onClick={(e) => addToCart(e)}>
+        Add to cart
+      </AddButton>
     </CollectionItemContainer>
   );
 };
