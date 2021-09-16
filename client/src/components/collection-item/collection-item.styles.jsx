@@ -3,6 +3,7 @@ import CustomButton from "../custom-button/custom-button.component";
 
 export const CollectionItemContainer = styled.div`
   width: 22vw;
+  margin: 15px;
   display: flex;
   flex-direction: column;
   height: 350px;
