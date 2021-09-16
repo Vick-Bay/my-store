@@ -115,7 +115,7 @@ class AuthService {
 
   async signToken(data) {
     try {
-      return jwt.sign(data, process.env.SECRET, { expiresIn: "1h" });
+      return jwt.sign(data, process.env.SECRET, { expiresIn: "2h" });
     } catch (error) {
       throw new ErrorHandler(500, "An error occurred");
     }
