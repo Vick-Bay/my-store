@@ -22,7 +22,7 @@ const CartDropDown = ({ cartItems, history, toggleCartHidden }) => (
     <CartItemsContainer>
       {cartItems.length ? (
         cartItems.map((cartItem) => (
-          <CartItem key={cartItem.id} item={cartItem} />
+          <CartItem key={cartItem.product_id} item={cartItem} />
         ))
       ) : (
         <EmptyMessageContainer>Your cart is empty</EmptyMessageContainer>

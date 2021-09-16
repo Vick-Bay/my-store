@@ -12,6 +12,7 @@ import {
   AddButton,
   Image,
   NameContainer,
+  Description,
   PriceContainer,
 } from "./product.styles";
 
@@ -57,6 +58,7 @@ class ProductDetails extends React.Component {
           <StockQuantityContainer>
             In Stock: {product.stock_quantity}
           </StockQuantityContainer>
+          <Description>{product.description}</Description>
           <AddButton onClick={this.handleAddToCart}>Add to cart</AddButton>
           <ProductReview productId={product.product_id} />
         </ProductItemContainer>

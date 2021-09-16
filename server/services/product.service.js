@@ -2,7 +2,7 @@ const {
   getAllProductsDb,
   createProductDb,
   getProductDb,
-  updateProductDb,
+  updateProductQuantityDb,
   deleteProductDb,
   getProductByNameDb,
 } = require("../db/product.db");
@@ -50,13 +50,14 @@ class ProductService {
     }
   };
 
-  updateProduct = async (data) => {
+  updateProductQuantity = async (data) => {
     try {
-      const product = await getProductDb(data.id);
+      const product = await getProductDb(data);
       if (!product) {
-        throw new ErrorHandler(404, "product not found");
+        throw new ErrorHandler(404, "Product not found");
       }
-      return await updateProductDb(data);
+      const newStockLevel = product.stock_quantity - data.quantity;
+      return await updateProductQuantityDb(newStockLevel, data.id);
     } catch (error) {
       throw new ErrorHandler(error.statusCode, error.message);
     }

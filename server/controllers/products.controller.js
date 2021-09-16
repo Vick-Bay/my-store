@@ -22,14 +22,13 @@ const getProductByName = async (req, res) => {
   const product = await productService.getProductByName(req.params);
   res.status(200).json(product);
 };
-const updateProduct = async (req, res) => {
-  const { name, price, description } = req.body;
+
+const updateProductQuantity = async (req, res) => {
+  const { quantity } = req.body;
   const { id } = req.params;
 
-  const updatedProduct = await productService.updateProduct({
-    name,
-    price,
-    description,
+  const updatedProduct = await productService.updateProductQuantity({
+    quantity,
     id,
   });
   res.status(200).json(updatedProduct);
@@ -103,7 +102,7 @@ const updateProductReview = async (req, res) => {
 module.exports = {
   getProduct,
   createProduct,
-  updateProduct,
+  updateProductQuantity,
   deleteProduct,
   getAllProducts,
   getProductByName,

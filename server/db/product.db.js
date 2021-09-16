@@ -51,10 +51,10 @@ const getProductByNameDb = async ({ name }) => {
   return product[0];
 };
 
-const updateProductDb = async ({ name, price, description, image_url, id }) => {
+const updateProductQuantityDb = async (stockLevel, id) => {
   const { rows: product } = await pool.query(
-    "UPDATE products set name = $1, price = $2, description = $3 image_url = $4 where product_id = $5 returning *",
-    [name, price, description, image_url, id]
+    "UPDATE products set stock_quantity = $1 where product_id = $2 returning *",
+    [stockLevel, id]
   );
   return product[0];
 };
@@ -71,7 +71,7 @@ module.exports = {
   getProductDb,
   getProductByNameDb,
   createProductDb,
-  updateProductDb,
+  updateProductQuantityDb,
   deleteProductDb,
   getAllProductsDb,
 };

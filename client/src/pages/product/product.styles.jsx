@@ -40,3 +40,8 @@ export const StockQuantityContainer = styled.span`
   margin-bottom: 15px;
   font-weight: bold;
 `;
+
+export const Description = styled.span`
+  margin-bottom: 15px;
+  font-weight: bold;
+`;

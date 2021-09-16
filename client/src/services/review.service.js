@@ -1,9 +1,6 @@
 import API from "../api/axios.config";
-
-const user_id = JSON.parse(localStorage.getItem("user"))?.user_id;
-
 class ReviewService {
-  getReviews(product_id) {
+  getReviews(user_id, product_id) {
     return API.get(`/products/${user_id}/reviews`, {
       params: {
         product_id,
@@ -11,20 +8,11 @@ class ReviewService {
       },
     });
   }
-  addReview(product_id, rating, content) {
-    return API.post("/reviews", {
+  addReview(user_id, product_id, content) {
+    console.log(user_id, product_id, content);
+    return API.post(`/products/${user_id}/reviews`, {
       product_id,
-      rating,
       content,
-    });
-  }
-
-  updateReview(id, product_id, content, rating) {
-    return API.put("/reviews", {
-      id,
-      content,
-      rating,
-      product_id,
     });
   }
 }

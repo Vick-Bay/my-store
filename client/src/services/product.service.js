@@ -10,6 +10,11 @@ class ProductService {
   getProductByName(name) {
     return API.get(`/products/${name}`);
   }
+  updateProductQuantity(quantity, product_id) {
+    return API.put(`/products/${product_id}`, {
+      quantity,
+    });
+  }
 }
 
 export default new ProductService();

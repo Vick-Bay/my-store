@@ -3,7 +3,7 @@ const {
   getAllProducts,
   createProduct,
   getProduct,
-  updateProduct,
+  updateProductQuantity,
   deleteProduct,
   getProductByName,
   getProductReviews,
@@ -21,7 +21,7 @@ router
   .route("/:id")
   .get(getProduct)
   .get(getProductByName)
-  .put(verifyToken, updateProduct)
+  .put(verifyToken, updateProductQuantity)
   .delete(verifyToken, deleteProduct);
 
 router
